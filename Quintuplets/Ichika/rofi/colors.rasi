@@ -1,0 +1,49 @@
+* {
+    foreground:  #676767;
+    backlight:   #ccffeedd;
+    background-color:  transparent;
+    bga: #fece13;
+    bgb: #fee613;
+    dark: #1c1c1c;
+    selected: #7f730a;
+
+    // Black
+    black:       #3d352a;
+    lightblack:  #554444;
+    tlightblack:  #554444cc;
+    //
+    // Red
+    red:         #cd5c5c;
+    lightred:    #cc5533;
+    //
+    // Green
+    green:       #86af80;
+    text:  #8813fe;
+    //
+    // Yellow
+    yellow:      #e8ae5b;
+    lightyellow:     #ffa75d;
+    //
+    // Blue
+    blue:      #6495ed;
+    lightblue:     #87ceeb;
+    //
+    // Magenta
+    magenta:      #deb887;
+    lightmagenta:     #996600;
+    //
+    // Cyan
+    cyan:      #b0c4de;
+    tcyan:      #ccb0c4de;
+    lightcyan:     #b0c4de;
+    //
+    // White
+    white:      #bbaa99;
+    lightwhite:     #ddccbb;
+    //
+    // Bold, Italic, Underline
+    highlight:     underline bold #ffffff;
+
+    transparent: rgba(0,0,0,0);
+    font: "Source Code Pro 10";
+}

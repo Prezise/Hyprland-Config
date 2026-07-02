@@ -1,0 +1,61 @@
+window#osd {
+  border-radius: 999px;
+  border: none;
+  background: rgba(241, 152, 146, 0.7);
+
+  #container {
+    margin: 16px;
+  }
+
+  trough,
+  segment {
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: #{"alpha(@theme_fg_color, 0.5)"};
+  }
+  progress,
+  segment.active {
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: #{"@theme_fg_color"};
+  }
+
+  segment {
+    margin-left: 8px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+label {
+  color: #323232; /* Change this to the desired color, test with red */
+  font-size: 24px; /* Optional: Increase size for visibility */
+}
+
+image {
+  color: #323232; /* If relevant, test this too */
+}
+
+progressbar:disabled,
+image:disabled {
+  opacity: 0.5;
+}
+
+progressbar,
+segmentedprogress {
+  min-height: 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+progress,
+segment.active {
+  min-height: 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+}
