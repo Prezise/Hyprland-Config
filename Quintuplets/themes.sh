@@ -24,7 +24,7 @@ case "$option" in
   "Random Background") dir=$(shuf -n1 -e ~/.config/themes/Quintuplets/*) ; cp -r $dir/* ~/.config ;;
   "...") ~/.config/themes/themes.sh ; exit 0;;
 esac
-
+if [ $? -ne 0 ]; then
+    exit 0
+fi
 ~/.config/hypr/scripts/reload.sh
-
-exit 0

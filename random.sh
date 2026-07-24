@@ -1,11 +1,11 @@
 #!/bin/bash
 random1=$(ls ~/.config/themes/random-backgrounds/video | wc -l)
 random2=$(ls ~/.config/themes/random-backgrounds/image | wc -l)
-columbina=$(ls ~/.config/themes/animated-backgrounds/Columbina/backgrounds | wc -l)
-furina=$(ls ~/.config/themes/animated-backgrounds/Furina/backgrounds | wc -l)
-hutao=$(ls ~/.config/themes/animated-backgrounds/hu-tao/backgrounds | wc -l)
-mavuika=$(ls ~/.config/themes/animated-backgrounds/Mavuika/backgrounds | wc -l)
-xilonen=$(ls ~/.config/themes/animated-backgrounds/Xilonen/backgrounds | wc -l)
+columbina=$(ls ~/.config/themes/animated-backgrounds/TeshiiLatte/Columbina/backgrounds | wc -l)
+furina=$(ls ~/.config/themes/animated-backgrounds/TeshiiLatte/Furina/backgrounds | wc -l)
+hutao=$(ls ~/.config/themes/animated-backgrounds/TeshiiLatte/hu-tao/backgrounds | wc -l)
+mavuika=$(ls ~/.config/themes/animated-backgrounds/TeshiiLatte/Mavuika/backgrounds | wc -l)
+xilonen=$(ls ~/.config/themes/animated-backgrounds/TeshiiLatte/Xilonen/backgrounds | wc -l)
 quints=$(ls ~/.config/themes/Quintuplets | wc -l)
 echo $random1
 echo $random2
@@ -27,28 +27,28 @@ sed -i '/exec-once = hyprpaper/c\exec-once = echo 1' ~/.config/hypr/exec.conf
 echo $number
 echo $range
 if ((number < columbina)); then
-    cp -r ~/.config/themes/animated-backgrounds/Columbina/files/* ~/.config
-    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/Columbina/backgrounds/*)
+    cp -r ~/.config/themes/animated-backgrounds/TeshiiLatte/Columbina/files/* ~/.config
+    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/TeshiiLatte/Columbina/backgrounds/*)
     cp -r $dir/bg.mp4 ~/.config/hypr
 fi
 if ((number >= columbina && number < ((columbina+furina)))); then
-    cp -r ~/.config/themes/animated-backgrounds/Furina/files/* ~/.config
-    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/Furina/backgrounds/*)
+    cp -r ~/.config/themes/animated-backgrounds/TeshiiLatte/Furina/files/* ~/.config
+    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/TeshiiLatte/Furina/backgrounds/*)
     cp -r $dir/bg.mp4 ~/.config/hypr
 fi
 if ((number >= ((columbina+furina)) && number < ((columbina+furina+hutao)))); then
-    cp -r ~/.config/themes/animated-backgrounds/hu-tao/files/* ~/.config
-    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/hu-tao/backgrounds/*)
+    cp -r ~/.config/themes/animated-backgrounds/TeshiiLatte/hu-tao/files/* ~/.config
+    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/TeshiiLatte/hu-tao/backgrounds/*)
     cp -r $dir/bg.mp4 ~/.config/hypr
 fi
 if ((number >= ((columbina+furina+hutao)) && number < ((columbina+furina+hutao+mavuika)))); then
-    cp -r ~/.config/themes/animated-backgrounds/Mavuika/files/* ~/.config
-    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/Mavuika/backgrounds/*)
+    cp -r ~/.config/themes/animated-backgrounds/TeshiiLatte/Mavuika/files/* ~/.config
+    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/TeshiiLatte/Mavuika/backgrounds/*)
     cp -r $dir/bg.mp4 ~/.config/hypr
 fi
 if ((number >= ((columbina+furina+hutao+mavuika)) && number <= ((columbina+furina+hutao+mavuika+xilonen)))); then
-    cp -r ~/.config/themes/animated-backgrounds/Xilonen/files/* ~/.config
-    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/Xilonen/backgrounds/*)
+    cp -r ~/.config/themes/animated-backgrounds/TeshiiLatte/Xilonen/files/* ~/.config
+    dir=$(shuf -n1 -e ~/.config/themes/animated-backgrounds/TeshiiLatte/Xilonen/backgrounds/*)
     cp -r $dir/bg.mp4 ~/.config/hypr
 fi
 if ((number >= ((columbina+furina+hutao+mavuika+xilonen)) && number <= ((columbina+furina+hutao+mavuika+xilonen+quints)))); then

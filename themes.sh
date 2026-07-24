@@ -2,7 +2,7 @@
 source ~/.config/themes/theme.conf
 
 entries=(
-  "Animated Backgrounds"
+  "Animated Backgrounds\0icon\x1f~/.config/themes/icons/previews/animated-backgrounds/teshiilatte.png"
   "Custom"
   "Quintessential Quintuplets\0icon\x1f~/.config/themes/icons/previews/quintuplets/main.png"
   "Random theme/background\0icon\x1f~/.config/themes/icons/$icon/question-mark.png"
