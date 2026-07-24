@@ -2,13 +2,13 @@
 
 aurhelper () {
     which yay 
-    if [$? -eq 0]
+    if [ $? -eq 0 ]
     then
       aur=yay
       return 0
     fi
     which paru 
-    if [$? -eq 0]
+    if [ $? -eq 0 ]
     then
       aur=paru
       return 0
@@ -33,20 +33,23 @@ sudo pacman -S --needed --noconfirm kitty rofi hyprpaper swaync || echo "Install
 echo "Installing AUR packages ..."
 if [ "$aur" == yay ]
 then 
-  yay -S --needed --diffmenu --noconfirm hyprshot waybar mpvpaper swayosd || echo "Installation failed." ; exit 1
+  yay -S --needed --diffmenu --noconfirm hyprshot waybar mpvpaper swayosd
   echo "Packages installed successfully"
 else
-  paru -S --needed --skipreview --noconfirm hyprshot waybar mpvpaper swayosd || echo "Installation failed." ; exit 1
+  paru -S --needed --skipreview --noconfirm hyprshot waybar mpvpaper swayosd
   echo "Packages installed successfully"
 fi
 echo "Cloning files into the main themes directory"
 mkdir ~/.config/themes
 cp -r * ~/.config/themes
 rm ~/.config/themes/install.sh
+cp -r ~/.config/themes/example-config/* ~/.config 
+cp -r ~/.config/themes/Quintuplets/Miku ~/.config 
 read -r -p "Precise's Hyprland config has been successfully installed. Delete this directory?" response
 if [[ -z "$response" || "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
-  rm -rf .
+  cd ..
+  rm -rf Hyprland-Config
   exit 0
 else
   exit 0
