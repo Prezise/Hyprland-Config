@@ -17,10 +17,10 @@ aurhelper () {
     if [[ -z "$response" || "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
     then
       echo "Installing yay..."
-      sudo pacman -S --needed --noconfirm git base-devel || echo "Installation failed." ; exit 1
-      git clone https://aur.archlinux.org/yay.git  || echo "Installation failed." ; exit 1
-      cd yay || echo "Installation failed." ; exit 1
-      makepkg -si || echo "Installation failed." ; exit 1
+      sudo pacman -S --needed --noconfirm git base-devel 
+      git clone https://aur.archlinux.org/yay.git  
+      cd yay 
+      makepkg -si 
       aur=yay
     else
       echo "You do not have an AUR helper. Aborting installation"
@@ -29,7 +29,7 @@ aurhelper () {
 }
 aurhelper
 echo "Installing pacman packages..."
-sudo pacman -S --needed --noconfirm kitty rofi hyprpaper swaync || echo "Installation failed." ; exit 1
+sudo pacman -S --needed --noconfirm kitty rofi awww swaync 
 echo "Installing AUR packages ..."
 if [ "$aur" == yay ]
 then 
@@ -43,14 +43,8 @@ echo "Cloning files into the main themes directory"
 mkdir ~/.config/themes
 cp -r * ~/.config/themes
 rm ~/.config/themes/install.sh
-cp -r ~/.config/themes/example-config/* ~/.config 
-cp -r ~/.config/themes/Quintuplets/Miku ~/.config 
-read -r -p "Precise's Hyprland config has been successfully installed. Delete this directory?" response
+read -r -p "Precise's Hyprland config has been successfully installed. Load the default config? (this will delete whatever config you currently have)" response
 if [[ -z "$response" || "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
-  cd ..
-  rm -rf Hyprland-Config
-  exit 0
-else
-  exit 0
-fi
+  cp -r ~/.config/themes/example-config/* ~/.config 
+cp -r ~/.config/themes/Quintuplets/Miku ~/.config 
