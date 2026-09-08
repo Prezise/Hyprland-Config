@@ -28,7 +28,7 @@ hl.monitor({
 ---------------------
 
 -- Set programs that you use
-local terminal    = "kitty"
+local terminal    = "kitty --hold fastfetch"
 local fileManager = "dolphin"
 local menu        = 'rofi -show drun -display-drun "" -theme ~/.config/rofi/applauncher.rasi'
 
@@ -132,7 +132,7 @@ hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 
 -- Default springs
-hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+hl.curve("easy",           { type = "spring", mass = 1, stiffness = 878.5, dampening = 59.29 })
 
 hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
@@ -188,14 +188,6 @@ hl.window_rule({
   fullscreen_state = "1 1"
 })
 
-hl.window_rule({
-  name = "scrcpy-phone",
-  match = {
-    class = "scrcpy"
-  },
-  float = on,
-  size = "442 985"
-})
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
@@ -235,7 +227,7 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "es,ru",
+        kb_layout  = "us,ru",
         kb_variant = "",
         kb_model   = "",
         kb_options = "grp:shift_caps_toggle",
