@@ -8,6 +8,7 @@
         "source": "~/.config/themes/themes/Quintuplets/.images/yotsuba.txt"
     },
     "display": {
+        "disableLinewrap": true,
         "separator": " -> ",
         "constants": [
             "──────────────────────────────"

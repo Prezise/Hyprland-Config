@@ -8,6 +8,7 @@
         "source": "~/.config/themes/themes/Quintuplets/.images/ichika.txt"
     },
     "display": {
+        "disableLinewrap": true,
         "separator": " -> ",
         "constants": [
             "──────────────────────────────"
@@ -114,8 +115,7 @@
         {
             "type": "gpu",
             "key": "│ ├{icon}",
-            "keyColor": "green",
-        },
+            "keyColor": "green"        },
         {
             "type": "disk",
             "key": "│ ├{icon}",

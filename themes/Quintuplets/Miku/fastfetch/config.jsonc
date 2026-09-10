@@ -7,6 +7,7 @@
         "source": "~/.config/themes/themes/Quintuplets/.images/miku.txt"
     },
     "display": {
+        "disableLinewrap": true,
         "separator": " -> ",
         "constants": [
             "──────────────────────────────"
