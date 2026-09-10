@@ -12,10 +12,10 @@ entries+=("...\0icon\x1f~/.config/themes/icons/$icon/back.png")
 
 option=$(printf "%b\n" "${entries[@]}" | rofi -theme ~/.config/rofi/theme1.rasi -show-icons -dmenu -p "Quintessential Quintuplets")
 
-if [ option="Random Background" ]; then
+if [ "$option" = "Random Background" ]; then
     dir=$(shuf -n1 -e ~/.config/themes/Quintuplets/*)
     cp -r $dir/* ~/.config
-elif [ option="..." ]; then
+elif [ "$option" = "..." ]; then
     ~/.config/themes/themes.sh
     exit 0
 else
