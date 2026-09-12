@@ -1,5 +1,17 @@
 #!/bin/bash
 source ~/.config/themes/theme.conf
+update () {
+  cd $HOME/.config/themes
+  cversion=$(git rev-parse HEAD)
+  lversion=$(git ls-remote origin main)
+  if [ "$cversion" = "$lversion" ]; then
+    echo "Script is up to date!"
+    return 0
+  fi
+  echo "Updating the script, please wait"
+  git pull || echo "Update failed ;("
+  echo "Update completed, reloading"
+}
 menu () {
   entries=(
     "Animated Backgrounds\0icon\x1f~/.config/themes/icons/previews/animated-backgrounds/teshiilatte.png"
@@ -58,7 +70,6 @@ random () {
   echo $fdir
   cp -r $fdir/* ~/.config
 }
-
 custom () {
   entries=()
   for dir in ~/.config/themes/themes/custom/*/; do
