@@ -19,7 +19,6 @@ menu () {
 quints () {
   entries=()
   for dir in ~/.config/themes/themes/Quintuplets/*/; do
-      name=$(basename "$dir")
       entries+=("${name}\0icon\x1f~/.config/themes/icons/previews/quintuplets/${name}.png")
   done
   entries+=("Random Background\0icon\x1f~/.config/themes/icons/$icon/question-mark.png")
@@ -29,7 +28,7 @@ quints () {
 
   if [ "$option" = "Random Background" ]; then
      dir=$(shuf -n1 -e ~/.config/themes/themes/Quintuplets/*)
-     cp -r $dir/* ~/.config
+     cp -r "${dir}"/* ~/.config
   elif [ "$option" = "..." ]; then
     menu
     return 0
@@ -38,6 +37,28 @@ quints () {
      echo "icon=white" > ~/.config/themes/theme.conf
   fi
 }
+random () {
+  RANDOM=$$$(date +%s)
+  entries=()
+  for dir in ~/.config/themes/themes/*/; do
+      entries+=("${dir}")
+  done
+  new_entries=()
+  for e in "${entries[@]}"; do
+    [[ "$e" != "$HOME/.config/themes/themes/custom/" ]] && new_entries+=("$e")
+  done
+  entries=("${new_entries[@]}")
+  sdir=${entries[$RANDOM % ${#entries[@]}]}
+  entries=()
+  for dir in "${sdir}"*/; do
+      entries+=("${dir}")
+  done
+  echo $entries
+  fdir=${entries[$RANDOM % ${#entries[@]}]}
+  echo $fdir
+  cp -r $fdir/* ~/.config
+}
+
 custom () {
   entries=()
   for dir in ~/.config/themes/themes/custom/*/; do
