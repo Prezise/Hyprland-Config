@@ -31,6 +31,7 @@ menu () {
 quints () {
   entries=()
   for dir in ~/.config/themes/themes/Quintuplets/*/; do
+      name=$(basename "${dir}")
       entries+=("${name}\0icon\x1f~/.config/themes/icons/previews/quintuplets/${name}.png")
   done
   entries+=("Random Background\0icon\x1f~/.config/themes/icons/$icon/question-mark.png")
