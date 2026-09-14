@@ -60,6 +60,9 @@ After you select a theme for the first time, the script will be bound to Super (
 - Super + Print Screen : Screenshot the selected window
 - Super + Left Shift + Print Screen : Screenshot only a selected square
 
+## Updating the config
+
+Just use git pull or run ~/.config/themes/prezise update
 
 ## Using this without the provided config
 
