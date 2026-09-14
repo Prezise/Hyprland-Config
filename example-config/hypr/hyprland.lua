@@ -22,7 +22,6 @@ hl.monitor({
     scale    = "auto",
 })
 
-
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
@@ -31,23 +30,13 @@ hl.monitor({
 local terminal    = "kitty --hold fastfetch"
 local fileManager = "dolphin"
 local menu        = 'rofi -show drun -display-drun "" -theme ~/.config/rofi/applauncher.rasi'
-
-
 -------------------
 ---- AUTOSTART ----
 -------------------
-
--- See https://wiki.hypr.land/Configuring/Basics/Autostart/
-
--- Autostart necessary processes (like notifications daemons, status bars, etc.)
--- Or execute your favorite apps at launch like this:
 require("exec")
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
-
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
@@ -130,7 +119,6 @@ hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1}
 hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}       } })
 hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}    } })
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
-
 -- Default springs
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 878.5, dampening = 59.29 })
 
@@ -152,24 +140,6 @@ hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
-
 hl.window_rule({
   name = "kitty-blur",
   match = {
@@ -178,16 +148,6 @@ hl.window_rule({
   xray = on,
   opacity = "0.80 0.70"
 })
-
-hl.window_rule({
-  name = "mpv-fs",
-  match = {
-    class = "mpv"
-  },
-  float = on,
-  fullscreen_state = "1 1"
-})
-
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
@@ -227,10 +187,10 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "us,ru",
+        kb_layout  = "us",
         kb_variant = "",
         kb_model   = "",
-        kb_options = "grp:shift_caps_toggle",
+        kb_options = "grp:shifts_toggle",
         kb_rules   = "",
 
         follow_mouse = 1,
@@ -261,22 +221,21 @@ hl.device({
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local mainMod = "SUPER"
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("steam"))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("librewolf"))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("env QT_QPA_PLATFORM=xcb flatpak run --command=startvesktop dev.vencord.Vesktop"))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))
 hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("pkill waybar || waybar"))
-hl.bind(mainMod .. " + SHIFT + CTRL + ALT + R", hl.dsp.exec_cmd("~/.config/themes/random.sh"))
+hl.bind(mainMod .. " + SHIFT + CTRL + ALT + R", hl.dsp.exec_cmd("~/.config/themes/prezise-themes.sh random"))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 require("binds")
 -- Move focus with mainMod + arrow keys
@@ -318,8 +277,8 @@ hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = tr
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
--- Andrei i hate you also Screenshot Stuffs :3
--- hl.bind(PRINT, hl.dsp.exec_cmd("hyprshot -m output"))
+-- Screenshot Stuffs
+hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m output"))
 hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m window"))
 hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
 
@@ -356,15 +315,6 @@ hl.window_rule({
     no_focus = true,
 })
 
--- Layer rules also return a handle.
--- local overlayLayerRule = hl.layer_rule({
---     name  = "no-anim-overlay",
---     match = { namespace = "^my-overlay$" },
---     no_anim = true,
--- })
--- overlayLayerRule:set_enabled(false)
-
--- Hyprland-run windowrule
 hl.window_rule({
     name  = "move-hyprland-run",
     match = { class = "hyprland-run" },
