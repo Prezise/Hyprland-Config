@@ -33,32 +33,32 @@ After you select a theme for the first time, the script will be bound to Super (
 
 ## List of Keybinds
 
-Super + Left Shift + Alt + R : Themes Menu
-Super + Left Shift + R  : Reload Config
+- Super + Left Shift + Alt + R : Themes Menu
+- Super + Left Shift + R  : Reload Config
 
 **From The default config**
 
-Super + Q : Terminal (Kitty)
-Super + C : Close Apps
-Super + M : Logout
-Super + E : File Manager (dolphin)
-Super + V : Floating Window
-Super + Tab : App Launcher (rofi)
-Super + P : Pseudotile Window
-Super + A : Steam
-Super + F : Firefox
-Super + D : Discord
-Super + H : Hide Waybar (toggle on and off)
-Super + Left Shift + Left Control + Alt + R : Random Theme
-Super + J : Togglesplit
-Super + Arrow Keys : Move between windows
-Super + Number : Move between workspaces
-Super + Left Shift + Number : Move windows between workspaces
-Super + Right Mouse Click : Resize Windows
-Super + Left Mouse Click : Move windows inside the same workspace
-Print Screen : Screenshot the entire Screen
-Super + Print Screen : Screenshot the selected window
-Super + Left Shift + Print Screen : Screenshot only a selected square
+- Super + Q : Terminal (Kitty)
+- Super + C : Close Apps
+- Super + M : Logout
+- Super + E : File Manager (dolphin)
+- Super + V : Floating Window
+- Super + Tab : App Launcher (rofi)
+- Super + P : Pseudotile Window
+- Super + A : Steam
+- Super + F : Firefox
+- Super + D : Discord
+- Super + H : Hide Waybar (toggle on and off)
+- Super + Left Shift + Left Control + Alt + R : Random Theme
+- Super + J : Togglesplit
+- Super + Arrow Keys : Move between windows
+- Super + Number : Move between workspaces
+- Super + Left Shift + Number : Move windows between workspaces
+- Super + Right Mouse Click : Resize Windows
+- Super + Left Mouse Click : Move windows inside the same workspace
+- Print Screen : Screenshot the entire Screen
+- Super + Print Screen : Screenshot the selected window
+- Super + Left Shift + Print Screen : Screenshot only a selected square
 
 
 ## Using this without the provided config
