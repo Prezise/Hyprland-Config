@@ -1,5 +1,6 @@
 #!/bin/bash
 source ~/.config/themes/theme.conf
+cd ~/.config/themes
 update () {
   cd $HOME/.config/themes
   cversion=$(git rev-parse HEAD)
