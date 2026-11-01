@@ -12,64 +12,80 @@ update () {
   git pull || echo "Update failed ;("
   echo "Update completed, reloading"
 }
+quints() {
+  menu
+}
 menu () {
-  entries=(
-    "Animated Backgrounds\0icon\x1f~/.config/themes/icons/previews/animated-backgrounds/teshiilatte.png"
-    "Custom"
-    "Quintessential Quintuplets\0icon\x1f~/.config/themes/icons/previews/quintuplets/main.png"
-    "Random theme/background\0icon\x1f~/.config/themes/icons/$icon/question-mark.png"
-  )
-
-  option=$(printf "%b\n" "${entries[@]}" | rofi -dmenu -theme ~/.config/rofi/theme1.rasi -show-icons -p "Themes")
-
-  case "$option" in
-    "Custom") custom ;;
-    "Quintessential Quintuplets") quints ;;
-    "Random theme/background") ~/.config/themes/random.sh
-  esac
-}
-quints () {
-  entries=()
-  for dir in ~/.config/themes/themes/Quintuplets/*/; do
-      name=$(basename "${dir}")
-      entries+=("${name}\0icon\x1f~/.config/themes/icons/previews/quintuplets/${name}.png")
-  done
-  entries+=("Random Background\0icon\x1f~/.config/themes/icons/$icon/question-mark.png")
-  entries+=("...\0icon\x1f~/.config/themes/icons/$icon/back.png")
-
-  option=$(printf "%b\n" "${entries[@]}" | rofi -theme ~/.config/rofi/theme1.rasi -show-icons -dmenu -p "Quintessential Quintuplets")
-
-  if [ "$option" = "Random Background" ]; then
-     dir=$(shuf -n1 -e ~/.config/themes/themes/Quintuplets/*)
-     cp -r "${dir}"/* ~/.config
-  elif [ "$option" = "..." ]; then
-    menu
-    return 0
-  else
-     cp -r ~/.config/themes/themes/Quintuplets/$option/* ~/.config
-     echo "icon=white" > ~/.config/themes/theme.conf
-  fi
-}
-random () {
-  RANDOM=$$$(date +%s)
   entries=()
   for dir in ~/.config/themes/themes/*/; do
-      entries+=("${dir}")
-  done
-  new_entries=()
-  for e in "${entries[@]}"; do
-    [[ "$e" != "$HOME/.config/themes/themes/custom/" ]] && new_entries+=("$e")
-  done
-  entries=("${new_entries[@]}")
-  sdir=${entries[$RANDOM % ${#entries[@]}]}
+      name=$(basename "${dir}")
+      echo $name
+      entries+=("${name}\0icon\x1f~/.config/themesv2/icons/previews/${name}.png")
+  done  
+  entries+=("Random Background\0icon\x1f~/.config/themesv2/icons/$icon/question-mark.png")
+  option=$(printf "%b\n" "${entries[@]}" | rofi -dmenu -theme ~/.config/rofi/theme1.rasi -show-icons -p "Themes")
+  if [ $? -eq 1 ]; then
+    exit 0
+  elif [ "$option" = "custom" ]; then
+    custom
+    return 0
+  elif [ "$option" = "Random Background" ]; then
+    random
+    return 0
+  fi
+  cd ~/.config/themesv2/themes/"$option"/
+  pwd
+  subdirectory
+}
+subdirectory () {
+  if [ -n $1 ]; then
+    cd $1
+  fi
+  directory=$(pwd | cut -d / -f7-)
+  if [ $(pwd) = "$HOME/.config/themesv2/themes" ]; then
+    menu
+    return 0
+  fi
   entries=()
-  for dir in "${sdir}"*/; do
-      entries+=("${dir}")
+  echo $directory
+  for dir in $HOME/.config/themesv2/themes/"$directory"/*/; do
+    name=$(basename "${dir}")
+    echo $name
+    entries+=("${name}\0icon\x1f~/.config/themesv2/icons/previews/${directory}/${name}.png")
   done
-  echo $entries
-  fdir=${entries[$RANDOM % ${#entries[@]}]}
-  echo $fdir
-  cp -r $fdir/* ~/.config
+  entries+=("Random Background\0icon\x1f~/.config/themesv2/icons/$icon/question-mark.png")
+  entries+=("...\0icon\x1f~/.config/themesv2/icons/$icon/back.png")
+  option=$(printf "%b\n" "${entries[@]}" | rofi -dmenu -theme ~/.config/rofi/theme1.rasi -show-icons -p "Themes")
+  if [ $? -eq 1 ]; then
+    exit 0
+  elif [ "$option" = "Random Background" ]; then
+     random
+     return 0
+  elif [ "$option" = "..." ]; then
+    cd ..
+    subdirectory
+    return 0
+  fi
+  cd "$option"
+  if [ -n "$(find bg.jpg)" ]; then
+    load
+    return 0
+  fi 
+  subdirectory
+}
+icon () {
+  echo $1
+  path=$(echo $1 | cut -b 8-)
+  mkdir $(echo "${path%/*}")
+  ffmpeg -i themes/"${path}"/bg.jpg -vf "scale=256:256:force_original_aspect_ratio=increase,crop=256:256" icons/previews/"${path}".png
+  exit 1
+}
+random () {
+  entries=()
+  mapfile -d '' entries < <(find . -mindepth 1 -name '.*' -prune -o -name bg.jpg -print0)
+  choice="${entries[RANDOM % ${#entries[@]}]}"
+  cd "${choice%/*}"
+  load 
 }
 custom () {
   entries=()
@@ -84,22 +100,12 @@ custom () {
      ~/.config/themes/themes.sh
      return 0
   fi
-  entries=()
-  for dir in ~/.config/themes/themes/*/; do
-    name=$(basename "$dir")
-    entries+=("${name}")
-  done
+  entries=(custom)
   entries+=("...\0icon\x1f~/.config/themes/icons/$icon/back.png")
   option1=$(printf "%b\n" "${entries[@]}" | rofi -theme ~/.config/rofi/theme2.rasi -dmenu -p "${roption}")
   if [ "$option1" = "..." ]; then
       ~/.config/themes/themes.sh
       return 0
-  elif [ "$option1" = "Quintuplets" ]; then
-    entries=()
-    for dir in ~/.config/themes/themes/Quintuplets/*/; do
-        name=$(basename "$dir")
-        entries+=("${name}\0icon\x1f~/.config/themes/icons/previews/quintuplets/${name}.png")
-    done
     entries+=("...\0icon\x1f~/.config/themes/icons/$icon/back.png")
     quint=$(printf "%b\n" "${entries[@]}" | rofi -theme ~/.config/rofi/theme2.rasi -dmenu -p "Quintessential Quintuplets")
     case "$option" in
@@ -130,6 +136,11 @@ custom () {
   mv ~/.config/"${option}"/"${option2}" ~/.config/"${option}/style.css"
   return 0
 }
+load () {
+ option=$(cat .assets | cut -d "%" -f 1)
+ cp -r ~/.config/themesv2/themes/.dictionary/"${option}"/* ~/.config/
+ cp bg.jpg ~/.config/hypr
+}
 reload () {
   killall -9 waybar
   killall -9 swayosd-server
@@ -142,5 +153,5 @@ reload () {
   hyprctl reload 
   exit 0
 }
-$1
+$1 $2
 reload
