@@ -38,7 +38,7 @@ menu () {
   subdirectory
 }
 subdirectory () {
-  if [ -n $1 ]; then
+  if [ -n "$1" ]; then
     cd $1
   fi
   directory=$(pwd | cut -d / -f7-)
@@ -154,4 +154,4 @@ reload () {
   exit 0
 }
 $1 $2
-reload
+#reload
