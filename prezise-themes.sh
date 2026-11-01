@@ -20,9 +20,9 @@ menu () {
   for dir in ~/.config/themes/themes/*/; do
       name=$(basename "${dir}")
       echo $name
-      entries+=("${name}\0icon\x1f~/.config/themesv2/icons/previews/${name}.png")
+      entries+=("${name}\0icon\x1f~/.config/themes/icons/previews/${name}.png")
   done  
-  entries+=("Random Background\0icon\x1f~/.config/themesv2/icons/$icon/question-mark.png")
+  entries+=("Random Background\0icon\x1f~/.config/themes/icons/$icon/question-mark.png")
   option=$(printf "%b\n" "${entries[@]}" | rofi -dmenu -theme ~/.config/rofi/theme1.rasi -show-icons -p "Themes")
   if [ $? -eq 1 ]; then
     exit 0
@@ -33,7 +33,7 @@ menu () {
     random
     return 0
   fi
-  cd ~/.config/themesv2/themes/"$option"/
+  cd ~/.config/themes/themes/"$option"/
   pwd
   subdirectory
 }
@@ -42,19 +42,19 @@ subdirectory () {
     cd $1
   fi
   directory=$(pwd | cut -d / -f7-)
-  if [ $(pwd) = "$HOME/.config/themesv2/themes" ]; then
+  if [ $(pwd) = "$HOME/.config/themes/themes" ]; then
     menu
     return 0
   fi
   entries=()
   echo $directory
-  for dir in $HOME/.config/themesv2/themes/"$directory"/*/; do
+  for dir in $HOME/.config/themes/themes/"$directory"/*/; do
     name=$(basename "${dir}")
     echo $name
-    entries+=("${name}\0icon\x1f~/.config/themesv2/icons/previews/${directory}/${name}.png")
+    entries+=("${name}\0icon\x1f~/.config/themes/icons/previews/${directory}/${name}.png")
   done
-  entries+=("Random Background\0icon\x1f~/.config/themesv2/icons/$icon/question-mark.png")
-  entries+=("...\0icon\x1f~/.config/themesv2/icons/$icon/back.png")
+  entries+=("Random Background\0icon\x1f~/.config/themes/icons/$icon/question-mark.png")
+  entries+=("...\0icon\x1f~/.config/themes/icons/$icon/back.png")
   option=$(printf "%b\n" "${entries[@]}" | rofi -dmenu -theme ~/.config/rofi/theme1.rasi -show-icons -p "Themes")
   if [ $? -eq 1 ]; then
     exit 0
@@ -138,7 +138,7 @@ custom () {
 }
 load () {
  option=$(cat .assets | cut -d "%" -f 1)
- cp -r ~/.config/themesv2/themes/.dictionary/"${option}"/* ~/.config/
+ cp -r ~/.config/themes/themes/.dictionary/"${option}"/* ~/.config/
  cp bg.jpg ~/.config/hypr
 }
 reload () {
