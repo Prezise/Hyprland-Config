@@ -154,4 +154,4 @@ reload () {
   exit 0
 }
 $1 $2
-#reload
+reload
